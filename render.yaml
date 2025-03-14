@@ -9,4 +9,3 @@ services:
         value: production
     autoDeploy: true
     plan: free
-    healthCheckPath: /

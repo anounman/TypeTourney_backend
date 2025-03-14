@@ -8,4 +8,15 @@ export interface User {
   wpm?: number; // Words per minute
   doneAt?: Date;
   isOwner: boolean;
-}   
+  performanceData?: PerformancePoint[];
+}
+
+
+export interface PerformancePoint {
+  timeRemaining: number;
+  wpm: number;
+  accuracy: number;
+  error: number;
+  wordCount: number;
+  characterCount: number;
+}
