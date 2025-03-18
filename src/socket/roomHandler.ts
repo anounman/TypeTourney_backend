@@ -95,4 +95,20 @@ export function setupRoomHandlers(io: Server, socket: Socket) {
       socket.emit('room:update_error', { message: "Failed to update room" });
     }
   });
+
+
+
+  socket.on('room:update_word', ({ roomId, word }: { roomId: string; word: string }) => {
+    try {
+      const room = roomService.getRoom(roomId);
+      if (!room) {
+        socket.emit('room:update_word_error', { message: "Room not found" });
+        return;
+      }
+      room.word = word;
+      io.to(roomId).emit('room:update_word_data', { room });
+    } catch (error) {
+      socket.emit('room:update_word_error', { message: "Failed to update word" });
+    }
+  });
 }

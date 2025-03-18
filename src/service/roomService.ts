@@ -9,7 +9,9 @@ const rooms: Map<string, Room> = new Map();
 
 // Create a new room
 export const createRoom = (room: Room): Room => {
-    room.id = room?.id ?? uuid();
+    room.id = room?.id ?? uuid({
+
+    });
     rooms.set(room.id, room);
     return room;
 };
@@ -128,6 +130,14 @@ export const updateUserProgress = (
 };
 
 
+export const updateRoomText = (roomId: string, text: string): Room | null => {
+    const room = rooms.get(roomId);
+    if (!room) {
+        return null;
+    }
+    room.word = text;
+    return room;
+}
 
 export const updateRoom = (room: Room): Room | null => {
     if (!rooms.has(room.id)) {
